@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:context="http://www.springframework.org/schema/context"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:mvc="http://www.springframework.org/schema/mvc"
-  xmlns:tx="http://www.springframework.org/schema/tx"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
       http://www.springframework.org/schema/beans/spring-beans.xsd
       http://www.springframework.org/schema/mvc
       http://www.springframework.org/schema/mvc/spring-mvc.xsd
@@ -12,54 +12,60 @@
       http://www.springframework.org/schema/context/spring-context.xsd 
       http://www.springframework.org/schema/tx 
 	  http://www.springframework.org/schema/tx/spring-tx.xsd">
-      
-  <context:component-scan base-package="com.pgx.java.web" />
-  
-  <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-    <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-    <property name="prefix" value="/WEB-INF/view/jsp/" />
-    <property name="suffix" value=".jsp" />
-  </bean>
-  
-  	<!-- Step 1: Define Database DataSource / connection pool -->
-	<bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-          destroy-method="close">
-        <property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/student_tracker?useSSL=false&amp;serverTimezone=UTC" />
-        <property name="user" value="springstudent" />
-        <property name="password" value="springstudent" /> 
 
-        <!-- these are connection pool properties for C3P0 -->
-		<property name="initialPoolSize" value="5"/>
-        <property name="minPoolSize" value="5" />
-        <property name="maxPoolSize" value="20" />
-        <property name="maxIdleTime" value="30000" />
-	</bean>  
-	
-    <!-- Step 2: Setup Hibernate session factory -->
+	<context:component-scan base-package="com.pgx.java.web" />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/view/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- Step 1: Define Database DataSource / connection pool -->
+	<bean id="myDataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
+		<property name="jdbcUrl"
+			value="jdbc:mysql://localhost:3306/student_tracker?useSSL=false&amp;serverTimezone=UTC" />
+		<property name="user" value="springstudent" />
+		<property name="password" value="springstudent" />
+
+		<!-- these are connection pool properties for C3P0 -->
+		<property name="initialPoolSize" value="5" />
+		<property name="minPoolSize" value="5" />
+		<property name="maxPoolSize" value="20" />
+		<property name="maxIdleTime" value="30000" />
+	</bean>
+
+	<!-- Step 2: Setup Hibernate session factory -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource" />
 		<property name="packagesToScan" value="com.pgx.java.web.bean" />
 		<property name="hibernateProperties">
-		   <props>
-		      <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-		      <prop key="hibernate.show_sql">true</prop>
-		   </props>
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
 		</property>
-   </bean>	  
+	</bean>
 
-    <!-- Step 3: Setup Hibernate transaction manager -->
+	<!-- Step 3: Setup Hibernate transaction manager -->
 	<bean id="myTransactionManager"
-            class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-    
-    <!-- Step 4: Enable configuration of transactional behavior based on annotations -->
-	<tx:annotation-driven transaction-manager="myTransactionManager" />
-  
-  <mvc:resources mapping="/resources/**" location="/resources/" />
-  
-  <mvc:annotation-driven />
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Step 4: Enable configuration of transactional behavior based on annotations -->
+	<tx:annotation-driven
+		transaction-manager="myTransactionManager" />
+
+	<mvc:resources mapping="/resources/**"
+		location="/resources/" />
+
+	<mvc:annotation-driven />
 
 </beans>
