@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.pgx.java.web.bean.Student;
 
@@ -35,6 +34,14 @@ public class StudentDAOImpl implements StudentDAO {
 	public Student getStudent(int id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void saveStudent(Student theStudent) {
+		Session currentSession=sessionFactory.getCurrentSession();
+		
+		currentSession.save(theStudent);
+		
 	}
 
 }

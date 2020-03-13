@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.pgx.java.web.bean.Instructor;
 
@@ -36,6 +35,14 @@ public class InstructorDAOImpl implements InstructorDAO{
 	public Instructor getInstructor(int id) {
 		
 		return null;
+	}
+
+	@Override
+	public void saveInstructor(Instructor theInstructor) {
+		Session currentSession=sessionFactory.getCurrentSession();
+		
+		currentSession.save(theInstructor);
+		
 	}
 
 }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pgx.java.web.bean.Course;
@@ -21,8 +23,24 @@ public class CourseController {
 	@GetMapping("/list")
 	String ListStudent(Model model) {
 		List<Course> thecourses = courseService.getCourses();
-		model.addAttribute("students", thecourses);
+		model.addAttribute("courses", thecourses);
 		return "list-courses";
+	}
+
+	@GetMapping("/showFormForAdd")
+	String showFormForAdd(Model model) {
+		Course c = new Course();
+		model.addAttribute("course", c);
+		return "courses-form";
+	}
+
+	@PostMapping("/saveCourse")
+	public String saveCustomer(@ModelAttribute("course") Course theCourse) {
+
+		// save the customer using our service
+		courseService.saveCourse(theCourse);
+
+		return "redirect:/course/list";
 	}
 
 }

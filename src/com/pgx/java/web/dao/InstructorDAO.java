@@ -8,4 +8,5 @@ import com.pgx.java.web.bean.Instructor;
 public interface InstructorDAO {
 	public List<Instructor> getInstructors();
 	public Instructor getInstructor(int id);
+	public void saveInstructor(Instructor theInstructor);
 }

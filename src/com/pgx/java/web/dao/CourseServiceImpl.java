@@ -27,4 +27,10 @@ public class CourseServiceImpl implements CourseService {
 		return courseDOA.getCourse(id);
 	}
 
+	@Override
+	@Transactional
+	public void saveCourse(Course theCourse) {
+		courseDOA.saveCourse(theCourse);
+	}
+
 }

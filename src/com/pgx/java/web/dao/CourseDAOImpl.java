@@ -32,4 +32,11 @@ public class CourseDAOImpl implements CourseDAO {
 		return null;
 	}
 
+	@Override
+	public void saveCourse(Course theCourse) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		currentSession.save(theCourse);
+	}
+
 }
