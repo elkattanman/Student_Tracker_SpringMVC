@@ -8,6 +8,11 @@
 </head>
 <body>
 	<h1>Hello World!</h1>
-	<a href="Hello">Click Here</a>
+	<hr>
+	<a href="student/list">List Student</a>
+	 | 
+	<a href="instructor/list">List Instructors</a>
+	 | 
+	<a href="course/list">List Courses</a>
 </body>
 </html>

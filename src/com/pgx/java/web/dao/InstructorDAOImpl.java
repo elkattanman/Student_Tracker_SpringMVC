@@ -19,7 +19,6 @@ public class InstructorDAOImpl implements InstructorDAO{
 	SessionFactory sessionFactory;
 	
 	@Override
-	@Transactional
 	public List<Instructor> getInstructors() {
 		
 		//get current Session

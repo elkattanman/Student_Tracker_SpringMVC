@@ -5,21 +5,22 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pgx.java.web.bean.Instructor;
-import com.pgx.java.web.dao.InstructorDAO;
+import com.pgx.java.web.dao.InstructorService;
 
 @Controller
 @RequestMapping("/instructor")
 public class InstructorController {
 	
 	@Autowired
-	InstructorDAO instructorDAO;
+	InstructorService instructorService;
 	
-	@RequestMapping("/list")
+	@GetMapping("/list")
 	String listInstructors(Model model) {
-		List<Instructor> theInstructors= instructorDAO.getInstructors();
+		List<Instructor> theInstructors= instructorService.getInstructors();
 		model.addAttribute("instructors", theInstructors);
 		return "list-instructors";
 	}

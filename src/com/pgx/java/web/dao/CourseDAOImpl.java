@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.pgx.java.web.bean.Course;
 
@@ -18,7 +17,6 @@ public class CourseDAOImpl implements CourseDAO {
 	SessionFactory sessionFactory;
 
 	@Override
-	@Transactional
 	public List<Course> getCourses() {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<Course> query = currentSession.createQuery("From Course", Course.class);
