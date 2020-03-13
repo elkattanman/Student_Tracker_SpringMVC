@@ -27,12 +27,11 @@
 		<div id="content">
 
 			<!-- put new button: Add Customer -->
-		
+
 			<input type="button" value="Add Instructor"
-				   onclick="window.location.href='showFormForAdd'; return false;"
-				   class="add-button"
-			/>
-			
+				onclick="window.location.href='showFormForAdd'; return false;"
+				class="add-button" />
+
 			<!--  add our html table here -->
 
 			<table>
@@ -42,17 +41,22 @@
 					<th>Email</th>
 					<th>Youtoube Channel</th>
 					<th>Hobby</th>
+					<th>Action</th>
 				</tr>
 
 				<!-- loop over and print our customers -->
 				<c:forEach var="tempIns" items="${instructors}">
-
+					<c:url var="updateLink" value="/instructor/showFormForUpdate">
+						<c:param name="instructorId" value="${tempIns.id}" />
+					</c:url>
 					<tr>
 						<td>${tempIns.firstName}</td>
 						<td>${tempIns.lastName}</td>
 						<td>${tempIns.email}</td>
 						<td>${tempIns.instructorDetail.youtubeChannel}</td>
 						<td>${tempIns.instructorDetail.hobby}</td>
+						<td><a href="${updateLink}">Update</a></td>
+				
 					</tr>
 
 				</c:forEach>

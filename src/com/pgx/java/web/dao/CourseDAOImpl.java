@@ -20,23 +20,25 @@ public class CourseDAOImpl implements CourseDAO {
 	public List<Course> getCourses() {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<Course> query = currentSession.createQuery("From Course", Course.class);
-		
-		List<Course> courses=query.getResultList();
+
+		List<Course> courses = query.getResultList();
 
 		return courses;
 	}
 
 	@Override
 	public Course getCourse(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Session currentSession = sessionFactory.getCurrentSession();
+		Course course = currentSession.get(Course.class, id);
+		return course;
 	}
 
 	@Override
 	public void saveCourse(Course theCourse) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		
-		currentSession.save(theCourse);
+
+//		currentSession.save(theCourse);
+		currentSession.saveOrUpdate(theCourse);
 	}
 
 }

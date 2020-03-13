@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pgx.java.web.bean.Course;
 import com.pgx.java.web.dao.CourseService;
@@ -30,6 +31,12 @@ public class CourseController {
 	@GetMapping("/showFormForAdd")
 	String showFormForAdd(Model model) {
 		Course c = new Course();
+		model.addAttribute("course", c);
+		return "courses-form";
+	}
+	@GetMapping("/showFormForUpdate")
+	String showFormForUpdate(@RequestParam("courseId") int courseId, Model model) {
+		Course c = courseService.getCourse(courseId);
 		model.addAttribute("course", c);
 		return "courses-form";
 	}

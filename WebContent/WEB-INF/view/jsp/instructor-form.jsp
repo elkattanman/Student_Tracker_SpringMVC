@@ -26,6 +26,7 @@
 
 		<form:form action="saveInstructor" modelAttribute="instructor"
 			method="POST">
+			<form:hidden path="id" />
 
 			<table>
 				<tbody>
@@ -53,7 +54,7 @@
 						<td><label>Hobbie:</label></td>
 						<td><form:input path="instructorDetail.hobby" /></td>
 					</tr>
-					
+
 					<tr>
 						<td><label></label></td>
 						<td><input type="submit" value="Save" class="save" /></td>

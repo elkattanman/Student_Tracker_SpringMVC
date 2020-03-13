@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pgx.java.web.bean.Student;
 import com.pgx.java.web.dao.StudentService;
@@ -19,29 +20,35 @@ public class StudentController {
 
 	@Autowired
 	StudentService studentService;
-	
+
 	@GetMapping("/list")
 	String ListStudent(Model model) {
-		List<Student> theStudents=studentService.getStudents();
+		List<Student> theStudents = studentService.getStudents();
 		model.addAttribute("students", theStudents);
-		
+
 		return "list-students";
 	}
-	
+
 	@GetMapping("/showFormForAdd")
 	String showFormForAdd(Model model) {
-		Student st=new Student();
+		Student st = new Student();
 		model.addAttribute("student", st);
 		return "student-form";
 	}
-	
+
+	@GetMapping("/showFormForUpdate")
+	String showFormForUpdate(@RequestParam("studentId") int studentId, Model model) {
+		Student st = studentService.getStudent(studentId);
+		model.addAttribute("student", st);
+		return "student-form";
+	}
+
 	@PostMapping("/saveStudent")
 	public String saveCustomer(@ModelAttribute("student") Student theStudent) {
-		
+
 		// save the customer using our service
 		studentService.saveStudent(theStudent);
-		
-		
+
 		return "redirect:/student/list";
 	}
 }

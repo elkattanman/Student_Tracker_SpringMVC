@@ -32,15 +32,17 @@ public class StudentDAOImpl implements StudentDAO {
 	
 	@Override
 	public Student getStudent(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		Session currentSession=sessionFactory.getCurrentSession();
+		Student student = currentSession.get(Student.class, id);
+		return student;
 	}
 
 	@Override
 	public void saveStudent(Student theStudent) {
 		Session currentSession=sessionFactory.getCurrentSession();
 		
-		currentSession.save(theStudent);
+//		currentSession.save(theStudent);
+		currentSession.saveOrUpdate(theStudent);
 		
 	}
 
