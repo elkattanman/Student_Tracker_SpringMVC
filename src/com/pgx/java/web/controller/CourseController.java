@@ -22,7 +22,7 @@ public class CourseController {
 	CourseService courseService;
 
 	@GetMapping("/list")
-	String ListStudent(Model model) {
+	String ListCourse(Model model) {
 		List<Course> thecourses = courseService.getCourses();
 		model.addAttribute("courses", thecourses);
 		return "list-courses";
@@ -48,6 +48,28 @@ public class CourseController {
 		courseService.saveCourse(theCourse);
 
 		return "redirect:/course/list";
+	}
+	
+	@GetMapping("/delete")
+	public String deleteCourse(@RequestParam("courseId") int theId) {
+		
+		// delete the Course
+		courseService.deleteCourse(theId);
+		
+		return "redirect:/course/list";
+	}
+
+	@GetMapping("/search")
+	public String searchCourses(@RequestParam("theSearchName") String theSearchName,
+									Model theModel) {
+
+		// search Courses from the service
+		List<Course> theCourses = courseService.searchCourses(theSearchName);
+				
+		// add the Courses to the model
+		theModel.addAttribute("courses", theCourses);
+
+		return "list-courses";		
 	}
 
 }

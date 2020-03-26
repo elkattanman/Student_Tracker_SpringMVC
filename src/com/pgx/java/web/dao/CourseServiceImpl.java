@@ -33,4 +33,16 @@ public class CourseServiceImpl implements CourseService {
 		courseDOA.saveCourse(theCourse);
 	}
 
+	@Override
+	@Transactional
+	public void deleteCourse(int theId) {
+		courseDOA.deleteCourse(theId);
+	}
+
+	@Override
+	@Transactional
+	public List<Course> searchCourses(String theSearchName) {
+		return courseDOA.searchCourses(theSearchName);
+	}
+
 }

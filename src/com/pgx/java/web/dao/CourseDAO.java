@@ -8,4 +8,6 @@ public interface CourseDAO {
 	public List<Course> getCourses();
 	public Course getCourse(int id);
 	public void saveCourse(Course theCourse);
+	public List<Course> searchCourses(String theSearchName);
+	public void deleteCourse(int theId);
 }

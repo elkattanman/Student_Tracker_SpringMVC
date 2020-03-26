@@ -4,7 +4,7 @@
 <html>
 
 <head>
-	<title>Save Customer</title>
+	<title>Save Student</title>
 
 	<link type="text/css"
 		  rel="stylesheet"
@@ -12,14 +12,14 @@
 
 	<link type="text/css"
 		  rel="stylesheet"
-		  href="${pageContext.request.contextPath}/resources/css/add-customer-style.css">
+		  href="${pageContext.request.contextPath}/resources/css/add-Student-style.css">
 </head>
 
 <body>
 	
 	<div id="wrapper">
 		<div id="header">
-			<h2>CRM - Customer Relationship Manager</h2>
+			<h2>CRM - Student Relationship Manager</h2>
 		</div>
 	</div>
 

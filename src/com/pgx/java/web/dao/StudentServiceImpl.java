@@ -33,4 +33,16 @@ public class StudentServiceImpl implements StudentService {
 		studentDOA.saveStudent(theStudent);
 	}
 
+	@Override
+	@Transactional
+	public void deleteStudent(int theId) {
+		studentDOA.deleteStudent(theId);
+	}
+
+	@Override
+	@Transactional
+	public List<Student> searchStudents(String theSearchName) {
+		return studentDOA.searchStudents(theSearchName);
+	}
+
 }

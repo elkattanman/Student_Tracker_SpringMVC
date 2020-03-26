@@ -50,4 +50,26 @@ public class InstructorController {
 
 		return "redirect:/instructor/list";
 	}
+	
+	@GetMapping("/delete")
+	public String deleteInstructor(@RequestParam("instructorId") int theId) {
+		
+		// delete the Instructor
+		instructorService.deleteInstructor(theId);
+		
+		return "redirect:/instructor/list";
+	}
+
+	@GetMapping("/search")
+	public String searchInstructors(@RequestParam("theSearchName") String theSearchName,
+									Model theModel) {
+
+		// search Instructors from the service
+		List<Instructor> theInstructors = instructorService.searchInstructors(theSearchName);
+				
+		// add the Instructors to the model
+		theModel.addAttribute("instructors", theInstructors);
+
+		return "list-instructors";		
+	}
 }

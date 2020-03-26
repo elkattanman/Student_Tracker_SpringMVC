@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 
@@ -26,12 +27,17 @@
 
 		<div id="content">
 
-			<!-- put new button: Add Customer -->
+			<!-- put new button: Add Instructor -->
 
 			<input type="button" value="Add Instructor"
 				onclick="window.location.href='showFormForAdd'; return false;"
 				class="add-button" />
-
+				
+			<form:form action="search" method="GET">
+				Search Student: <input type="text" name="theSearchName" />
+				<input type="submit" value="Search" class="add-button" />
+			</form:form>
+			
 			<!--  add our html table here -->
 
 			<table>
@@ -44,9 +50,12 @@
 					<th>Action</th>
 				</tr>
 
-				<!-- loop over and print our customers -->
+				<!-- loop over and print our Instructors -->
 				<c:forEach var="tempIns" items="${instructors}">
 					<c:url var="updateLink" value="/instructor/showFormForUpdate">
+						<c:param name="instructorId" value="${tempIns.id}" />
+					</c:url>
+					<c:url var="deleteLink" value="/instructor/delete">
 						<c:param name="instructorId" value="${tempIns.id}" />
 					</c:url>
 					<tr>
@@ -55,8 +64,11 @@
 						<td>${tempIns.email}</td>
 						<td>${tempIns.instructorDetail.youtubeChannel}</td>
 						<td>${tempIns.instructorDetail.hobby}</td>
-						<td><a href="${updateLink}">Update</a></td>
-				
+						<td><a href="${updateLink}">Update</a> | <a
+							href="${deleteLink}"
+							onclick="if (!(confirm('Are you sure you want to delete this Instructor?'))) return false">Delete</a>
+						</td>
+
 					</tr>
 
 				</c:forEach>

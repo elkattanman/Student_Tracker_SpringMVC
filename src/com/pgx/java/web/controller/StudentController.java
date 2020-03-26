@@ -44,11 +44,33 @@ public class StudentController {
 	}
 
 	@PostMapping("/saveStudent")
-	public String saveCustomer(@ModelAttribute("student") Student theStudent) {
+	public String saveStudent(@ModelAttribute("student") Student theStudent) {
 
-		// save the customer using our service
+		// save the student using our service
 		studentService.saveStudent(theStudent);
 
 		return "redirect:/student/list";
+	}
+	
+	@GetMapping("/delete")
+	public String deleteStudent(@RequestParam("studentId") int theId) {
+		
+		// delete the student
+		studentService.deleteStudent(theId);
+		
+		return "redirect:/student/list";
+	}
+
+	@GetMapping("/search")
+	public String searchStudents(@RequestParam("theSearchName") String theSearchName,
+									Model theModel) {
+
+		// search students from the service
+		List<Student> theStudents = studentService.searchStudents(theSearchName);
+				
+		// add the students to the model
+		theModel.addAttribute("students", theStudents);
+
+		return "list-students";		
 	}
 }

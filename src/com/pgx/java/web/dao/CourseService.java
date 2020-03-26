@@ -8,4 +8,6 @@ public interface CourseService {
 	public List<Course> getCourses();
 	public Course getCourse(int id);
 	public void saveCourse(Course theCourse);
+	public void deleteCourse(int theId);
+	public List<Course> searchCourses(String theSearchName);
 }

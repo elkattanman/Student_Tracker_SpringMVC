@@ -34,4 +34,17 @@ public class InstructorServiceImpl implements InstructorService {
 		
 	}
 
+	@Override
+	@Transactional
+	public void deleteInstructor(int theId) {
+		intructorDOA.deleteInstructor(theId);
+		
+	}
+
+	@Override
+	@Transactional
+	public List<Instructor> searchInstructors(String theSearchName) {
+		return intructorDOA.searchInstructors(theSearchName);
+	}
+
 }
